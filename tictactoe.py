@@ -1,5 +1,6 @@
 """
 Tic Tac Toe Player
+Group : Wesley Zoroya, Geovanny Casian
 """
 from collections import Counter
 import math
