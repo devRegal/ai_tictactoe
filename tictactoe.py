@@ -53,6 +53,8 @@ def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
+
+    # creates deep copy of board so that input board will remain intact
     board_copy = copy.deepcopy(board)
 
     if player(board) == X:
@@ -146,20 +148,26 @@ def minimax_pruning(board, alpha, beta, is_max):
         return score(board)
 
     if is_max:
+        # setting the value alpha to change
         v = float('-inf')
         for action in actions(board):
             result_board = result(board, action)
+            # recursively call itself, but change alpha <-> beta
             v = max(v, minimax_pruning(result_board, alpha, beta, False))
             alpha = max(alpha, v)
+            # check for alpha  >= beta
             if alpha >= beta:
                 break
         return v
 
     else:
+        # setting the value beta to change
         v = float('inf')
         for action in actions(board):
             result_board = result(board, action)
+            # recursively call itself, but change alpha <-> beta
             v = min(v, minimax_pruning(result_board, alpha, beta, True))
+            # check for alpha  >= beta
             beta = min(beta, v)
             if alpha >= beta:
                 break
